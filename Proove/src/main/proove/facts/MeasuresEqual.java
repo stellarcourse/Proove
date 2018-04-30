@@ -8,7 +8,7 @@ import proove.symbols.Symbol;
  * another: angle ¡ÏABC = ¡ÏCDA in Parallelogram
  * <p>
  * usage suggestion: 
- * 	keep a map of objects that are equal, allow system to verify
+ * 	keep a set of objects that are equal, allow system to verify
  *  whether something are equal
  * @author Hai
  *
@@ -29,7 +29,6 @@ public class MeasuresEqual<T extends Symbol> extends Fact {
 	}
 	@Override
 	public String state() {
-		// TODO Auto-generated method stub
 		return x.explain() +  symbol  + y.explain();
 	}
 	/* (non-Javadoc)

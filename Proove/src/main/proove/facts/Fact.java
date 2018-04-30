@@ -8,6 +8,16 @@ package proove.facts;
  *
  */
 public abstract class Fact {
+	public abstract String explain();
+	/**
+	 *  concise way of explaining
+	 * @return
+	 */
+	public abstract String state();
+	public Fact(String type, String symbol){
+		this.type = type;
+		this.symbol= symbol;
+	}
 	public String getType(){return type;}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -42,13 +52,7 @@ public abstract class Fact {
 			return false;
 		}
 		return true;
-	}
-	public abstract String explain();
-	public abstract String state();
-	public Fact(String type, String symbol){
-		this.type = type;
-		this.symbol= symbol;
-	}
+	}	
 	protected String type;
 	protected String symbol;
 }
