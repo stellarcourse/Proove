@@ -1,7 +1,7 @@
 package proove.symbols;
 
-public class PointSymbol extends Symbol {
-	public PointSymbol(String n){
+public class Point extends Symbol {
+	public Point(String n){
 		super("Point");
 		name = n;
 	}

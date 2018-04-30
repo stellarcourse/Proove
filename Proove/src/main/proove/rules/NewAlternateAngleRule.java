@@ -1,12 +1,11 @@
 package proove.rules;
 
 import proove.facts.Fact;
-import proove.facts.MeasuresEqual;
 import proove.facts.NewMeasuresEqual;
 import proove.facts.OrientsEqual;
 import proove.info.IncorrectProove;
-import proove.symbols.AngleSymbol;
-import proove.symbols.SegmentSymbol;
+import proove.symbols.Angle;
+import proove.symbols.Segment;
 import proove.symbols.Symbol;
 
 /**
@@ -15,38 +14,38 @@ import proove.symbols.Symbol;
  * @author Hai
  *
  */
-public class NewAlternateAngleRule extends NewRule<NewMeasuresEqual<AngleSymbol>, OrientsEqual>{
-	public NewAlternateAngleRule(NewMeasuresEqual<AngleSymbol> input, OrientsEqual output){
+public class NewAlternateAngleRule extends NewRule<NewMeasuresEqual<Angle>, OrientsEqual>{
+	public NewAlternateAngleRule(NewMeasuresEqual<Angle> input, OrientsEqual output){
 		super(input, output);
 	}
 
-	private AngleSymbol checkAngle(Symbol s) throws IncorrectProove{
-		if (!(s instanceof AngleSymbol))
+	private Angle checkAngle(Symbol s) throws IncorrectProove{
+		if (!(s instanceof Angle))
 			throw new IncorrectProove("In AlternateAngleRule, left input is not angle symbol");
 		
-		return (AngleSymbol)s;
+		return (Angle)s;
 	}
 	
 	@Override
 	public boolean check() throws IncorrectProove{
 		// verifies that the input is a pair of alternate angles
 		
-		NewMeasuresEqual<AngleSymbol> me = (NewMeasuresEqual<AngleSymbol>)input;
+		NewMeasuresEqual<Angle> me = (NewMeasuresEqual<Angle>)input;
 		
-		AngleSymbol left = checkAngle(me.left());
-		AngleSymbol right = checkAngle(me.right());
+		Angle left = checkAngle(me.left());
+		Angle right = checkAngle(me.right());
 		
-		SegmentSymbol BA = left.from();
-		SegmentSymbol BC = left.to();
+		Segment BA = left.from();
+		Segment BC = left.to();
 		
-		SegmentSymbol CD = right.from();
-		SegmentSymbol CB = right.to();
+		Segment CD = right.from();
+		Segment CB = right.to();
 		
 		boolean result= BC.mirrors(CB);
 		
 		OrientsEqual oe = (OrientsEqual)output;
-		SegmentSymbol AB = oe.up();
-		SegmentSymbol CD2 = oe.down();
+		Segment AB = oe.up();
+		Segment CD2 = oe.down();
 		
 		boolean result1= AB.mirrors(BA) && CD.equals(CD2);
 		boolean result2= AB.equals(AB) && CD.mirrors(CD2);

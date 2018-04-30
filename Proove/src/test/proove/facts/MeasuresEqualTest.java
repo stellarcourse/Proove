@@ -9,39 +9,38 @@ import org.junit.Before;
 import org.junit.Test;
 
 import proove.facts.Fact;
-import proove.facts.MeasuresEqual;
-import proove.facts.MeasuresMirror;
 import proove.info.IncorrectProove;
-import proove.rules.AlternateAngleRule;
-import proove.symbols.AngleSymbol;
-import proove.symbols.PointSymbol;
-import proove.symbols.SegmentSymbol;
+import proove.proof.ProofManager;
+import proove.rules.NewAlternateAngleRule;
+import proove.symbols.Angle;
+import proove.symbols.Point;
+import proove.symbols.Segment;
 
 public class MeasuresEqualTest {
-    PointSymbol A=new PointSymbol("A");
-    PointSymbol B=new PointSymbol("B");
-    PointSymbol C=new PointSymbol("C");
-    PointSymbol D=new PointSymbol("D");
-    PointSymbol E=new PointSymbol("E");
-    PointSymbol F=new PointSymbol("F");
+    Point A=new Point("A");
+    Point B=new Point("B");
+    Point C=new Point("C");
+    Point D=new Point("D");
+    Point E=new Point("E");
+    Point F=new Point("F");
     
-    SegmentSymbol AB = new SegmentSymbol(A, B);
-    SegmentSymbol BA = new SegmentSymbol(B, A);
-    SegmentSymbol CD = new SegmentSymbol(C, D);
-    SegmentSymbol DC = new SegmentSymbol(D, C);
-    SegmentSymbol EF = new SegmentSymbol(E, F);
+    Segment AB = new Segment(A, B);
+    Segment BA = new Segment(B, A);
+    Segment CD = new Segment(C, D);
+    Segment DC = new Segment(D, C);
+    Segment EF = new Segment(E, F);
     
-    AngleSymbol ABC = new AngleSymbol(A, B, C);
-    AngleSymbol CDA = new AngleSymbol(C, D, A);
+    Angle ABC = new Angle(A, B, C);
+    Angle CDA = new Angle(C, D, A);
     
-    MeasuresEqual seABCD =new MeasuresEqual(AB, CD); 
-    MeasuresEqual seCDAB =new MeasuresEqual(CD, AB);
+    NewMeasuresEqual<Segment> seABCD =new NewMeasuresEqual<>(AB, CD); 
+    NewMeasuresEqual<Segment> seCDAB =new NewMeasuresEqual<>(CD, AB);
     
-    MeasuresMirror smABEF = new MeasuresMirror(AB, EF);
-    MeasuresMirror smEFAB = new MeasuresMirror(EF, AB);
+    NewMeasuresMirror<Segment> smABEF = new NewMeasuresMirror<>(AB, EF);
+    NewMeasuresMirror<Segment> smEFAB = new NewMeasuresMirror<>(EF, AB);
     
-    MeasuresEqual aeBD = new MeasuresEqual(ABC, CDA);
-    MeasuresEqual aeDB = new MeasuresEqual(CDA, ABC);
+    NewMeasuresEqual<Angle> aeBD = new NewMeasuresEqual<>(ABC, CDA);
+    NewMeasuresEqual<Angle> aeDB = new NewMeasuresEqual<>(CDA, ABC);
     
     OrientsEqual oeABCD = new OrientsEqual(AB, CD);
     OrientsEqual oeCDAB = new OrientsEqual(CD, AB);
@@ -51,10 +50,10 @@ public class MeasuresEqualTest {
 	@Before
 	public void setUp() throws Exception {
 		all.add(seABCD);
-	    all.add(new MeasuresMirror(AB, EF));
+	    all.add(new NewMeasuresMirror<Segment>(AB, EF));
 	    
-	    all.add(new MeasuresEqual(ABC, CDA));
-	    all.add(new MeasuresEqual(CDA, ABC));
+	    all.add(new NewMeasuresEqual<Angle>(ABC, CDA));
+	    all.add(new NewMeasuresEqual<Angle>(CDA, ABC));
 	}
 
 	@After
@@ -82,22 +81,22 @@ public class MeasuresEqualTest {
 	@Test
 	public void testSetSize() {
 		all.clear();
-		all.add(new MeasuresEqual(AB, CD));
-		all.add(new MeasuresEqual(AB, CD));
+		all.add(new NewMeasuresEqual<Segment>(AB, CD));
+		all.add(new  NewMeasuresEqual<Segment>(AB, CD));
 		assertEquals(all.size(), 1);
 		
-	    SegmentSymbol BA = new SegmentSymbol(B, A);
-	    SegmentSymbol DC = new SegmentSymbol(D, C);
+	    Segment BA = new Segment(B, A);
+	    Segment DC = new Segment(D, C);
 	    
-	    MeasuresEqual seBADC =new MeasuresEqual(BA, DC); 
+	    NewMeasuresEqual<Segment> seBADC =new  NewMeasuresEqual<Segment>(BA, DC); 
 		assertEquals(seABCD, (seBADC));
 		
 		all.add(seBADC);
 		assertEquals(all.size(), 1);
 		
-		MeasuresMirror smABDC = new MeasuresMirror(AB, DC);
-		MeasuresMirror smDCAB = new MeasuresMirror(DC, AB);
-		MeasuresMirror smBACD = new MeasuresMirror(BA, CD);
+		NewMeasuresMirror<Segment> smABDC = new NewMeasuresMirror<>(AB, DC);
+		NewMeasuresMirror<Segment> smDCAB = new NewMeasuresMirror<>(DC, AB);
+		NewMeasuresMirror<Segment> smBACD = new NewMeasuresMirror<>(BA, CD);
 		assertEquals(smABDC, smDCAB);
 		assertEquals(smABDC, smBACD);
 		
@@ -130,12 +129,12 @@ public class MeasuresEqualTest {
 	public void testSetAngles() {
 	    //MeasuresEqual aeBD = new MeasuresEqual(ABC, CDA);
 	    //MeasuresEqual aeDB = new MeasuresEqual(CDA, ABC);
-		AngleSymbol CBA = new AngleSymbol(C, B, A);
-	    AngleSymbol ADC= new AngleSymbol(A, D, C);
+		Angle CBA = new Angle(C, B, A);
+	    Angle ADC= new Angle(A, D, C);
 	    
-	    MeasuresMirror amBD = new MeasuresMirror(ABC, CDA);
-	    MeasuresMirror amDB = new MeasuresMirror(CDA, ABC);
-	    MeasuresMirror amBD2 = new MeasuresMirror(CBA, ADC);
+	    NewMeasuresMirror<Angle> amBD = new NewMeasuresMirror<>(ABC, CDA);
+	    NewMeasuresMirror<Angle> amDB = new NewMeasuresMirror<>(CDA, ABC);
+	    NewMeasuresMirror<Angle> amBD2 = new NewMeasuresMirror<>(CBA, ADC);
 	    
 	    assertEquals(amBD, amDB);
 	    System.out.println(amBD.hashCode());
@@ -143,14 +142,14 @@ public class MeasuresEqualTest {
 	    System.out.println(amBD.equals(amBD2));
 	    assertEquals(amBD, amBD2);
 	    
-		MeasuresMirror amBB = new MeasuresMirror(ABC, CBA);
+		NewMeasuresMirror<Angle> amBB = new NewMeasuresMirror<>(ABC, CBA);
 	}
 	@Test
 	public void testAlternateRule(){
-		AngleSymbol DCB = new AngleSymbol(D, C, B);
-		MeasuresEqual amBC = new MeasuresEqual(ABC, DCB);
+		Angle DCB = new Angle(D, C, B);
+		NewMeasuresEqual<Angle> amBC = new NewMeasuresEqual<>(ABC, DCB);
 		OrientsEqual oeABCD = new OrientsEqual(AB, CD);
-		AlternateAngleRule aar = new AlternateAngleRule(amBC, oeABCD);
+		NewAlternateAngleRule aar = new NewAlternateAngleRule(amBC, oeABCD);
 		try {
 			assertTrue(aar.check());
 		} catch (IncorrectProove e) {
@@ -159,7 +158,7 @@ public class MeasuresEqualTest {
 		
 		OrientsEqual oeBADC = new OrientsEqual(BA, DC);
 		
-		AlternateAngleRule aar2 = new AlternateAngleRule(amBC, oeBADC);
+		NewAlternateAngleRule aar2 = new NewAlternateAngleRule(amBC, oeBADC);
 		try {
 			assertTrue(aar.check());
 		} catch (IncorrectProove e) {
@@ -167,10 +166,13 @@ public class MeasuresEqualTest {
 		}
 	}
 	@Test
-	public void testGenericAlternateRule(){
-		AngleSymbol DCB = new AngleSymbol(D, C, B);
-		NewMeasuresEqual<AngleSymbol> amBC = new NewMeasuresEqual<>(ABC, DCB);
+	public void testGenericAlternateRule() throws IncorrectProove{
+		Angle DCB = new Angle(D, C, B);
+		NewMeasuresEqual<Angle> amBC = new NewMeasuresEqual<>(ABC, DCB);
 		OrientsEqual oeABCD = new OrientsEqual(AB, CD);
-		
+		NewAlternateAngleRule aar = new NewAlternateAngleRule(amBC, oeABCD);
+		ProofManager pm = new ProofManager();
+		pm.addRule(aar);
+		pm.verify(oeABCD);
 	}
 }

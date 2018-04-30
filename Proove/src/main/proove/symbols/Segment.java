@@ -5,8 +5,8 @@ package proove.symbols;
  * @author Hai
  *
  */
-public class SegmentSymbol extends Symbol {
-	public SegmentSymbol(PointSymbol a, PointSymbol b){
+public class Segment extends Symbol {
+	public Segment(Point a, Point b){
 		super("Segment ");
 		from = a;
 		to = b;
@@ -29,30 +29,33 @@ public class SegmentSymbol extends Symbol {
 		return result;
 	}
 	
-	public boolean equals(SegmentSymbol other){
+	public boolean equals(Segment other){
 		return (from.equals(other.from) && to.equals(other.to));
 	}
 	
-	public boolean mirrors(SegmentSymbol other){
+	public boolean mirrors(Segment other){
 		return (from.equals(other.to) && to.equals(other.from));
 	}
-	public boolean equalsOrMirrors(SegmentSymbol other){
+	public boolean equalsOrMirrors(Segment other){
 		return equals(other)||mirrors(other);
 	}
-	private PointSymbol from;
-	private PointSymbol to;
+	private Point from;
+	private Point to;
 	@Override
 	public boolean mirrors(Object obj) {
 		if (this.equals(obj))
 		return false;
 		
-		if (!(obj instanceof SegmentSymbol))
+		if (!(obj instanceof Segment))
 			return false;
 		
-		SegmentSymbol other = (SegmentSymbol) obj;
+		Segment other = (Segment) obj;
 		if (from.equals(other.to) && to.equals(other.from))
 			return true;
 		
 		return false;
+	}
+	public Segment getMirror(){
+		return new Segment(to, from);
 	}
 }

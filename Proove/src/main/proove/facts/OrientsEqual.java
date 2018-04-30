@@ -1,6 +1,6 @@
 package proove.facts;
 
-import proove.symbols.SegmentSymbol;
+import proove.symbols.Segment;
 import proove.symbols.Symbol;
 
 /**
@@ -16,15 +16,15 @@ import proove.symbols.Symbol;
  * @param <KeyType>
  */
 public class OrientsEqual extends Fact {
-	public OrientsEqual(SegmentSymbol a, SegmentSymbol b){
+	public OrientsEqual(Segment a, Segment b){
 		super("Parallel", "=//");
 		x=a;
 		y=b;
 	}
-	public SegmentSymbol up(){return x;}
-	public SegmentSymbol down(){return y;}
+	public Segment up(){return x;}
+	public Segment down(){return y;}
 	
-	private SegmentSymbol x, y;
+	private Segment x, y;
 	@Override
 	public String explain() {
 		return x.explain() + " " + getType() +" with " + y.explain();

@@ -1,10 +1,10 @@
 package proove.symbols;
 
 public class TriangleSymbol {
-	public TriangleSymbol(PointSymbol a, PointSymbol b, PointSymbol c){
+	public TriangleSymbol(Point a, Point b, Point c){
 		A=a;
 		B=b;
 		C=c;
 	}
-	private PointSymbol A, B, C;
+	private Point A, B, C;
 }

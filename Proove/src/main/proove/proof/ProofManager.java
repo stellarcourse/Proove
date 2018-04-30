@@ -4,7 +4,8 @@ import java.util.HashSet;
 
 import proove.facts.Fact;
 import proove.info.IncorrectProove;
-import proove.rules.Rule;
+import proove.rules.NewRule;
+
 
 /**
  * instance of proof manager to manage the reasoning steps
@@ -12,15 +13,8 @@ import proove.rules.Rule;
  *
  */
 public class ProofManager {
-	private static HashSet<Fact> effects= new HashSet<Fact>();
-	private static ProofManager pm;
-	public ProofManager getInstance(){
-		if (pm==null){
-			pm = new ProofManager();
-		}
-		return pm;
-	}
-	public void addRule(Rule x) throws IncorrectProove{
+	private HashSet<Fact> effects= new HashSet<Fact>();
+	public void addRule(NewRule<? extends Fact, ? extends Fact> x) throws IncorrectProove{
 		x.verify();
 		effects.add(x.effect());
 	}

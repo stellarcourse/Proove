@@ -9,16 +9,16 @@ package proove.symbols;
  * @author Hai
  *
  */
-public class AngleSymbol extends Symbol {
-	public AngleSymbol(PointSymbol a, PointSymbol b, PointSymbol c){
+public class Angle extends Symbol {
+	public Angle(Point a, Point b, Point c){
 		super("¡Ï");
-		BA=new SegmentSymbol(b, a);
-		BC=new SegmentSymbol(b, c);
+		BA=new Segment(b, a);
+		BC=new Segment(b, c);
 		name = a.name+b.name+c.name;
 	}
-	public SegmentSymbol from(){return BA;}
-	public SegmentSymbol to(){return BC;}
-	private SegmentSymbol BA, BC;	// angle from BA to BC
+	public Segment from(){return BA;}
+	public Segment to(){return BC;}
+	private Segment BA, BC;	// angle from BA to BC
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -36,12 +36,12 @@ public class AngleSymbol extends Symbol {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}	
-	public boolean equals(AngleSymbol other){
+	public boolean equals(Angle other){
 		return 	(BA.equals(other.BA) && BC.equals(other.BC)) ||
 				(BA.mirrors(other.BA) && BC.mirrors(other.BC));
 	}
 	
-	public boolean mirrors(AngleSymbol other){
+	public boolean mirrors(Angle other){
 		return	(BA.equals(other.BC) && BC.equals(other.BA)) ||
 				(BA.equals(other.BA) && BC.equals(other.BC));
 	}
@@ -50,10 +50,10 @@ public class AngleSymbol extends Symbol {
 		if (this==obj)
 			return false;
 		
-		if (!(obj instanceof AngleSymbol))
+		if (!(obj instanceof Angle))
 			return false;
 		
-		AngleSymbol other = (AngleSymbol) obj;
+		Angle other = (Angle) obj;
 		return mirrors(other);
 	}	
 }

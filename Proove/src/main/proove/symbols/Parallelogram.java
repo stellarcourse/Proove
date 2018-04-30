@@ -1,11 +1,11 @@
 package proove.symbols;
 
 public class Parallelogram {
-	public Parallelogram(PointSymbol a, PointSymbol b, PointSymbol c, PointSymbol d){
+	public Parallelogram(Point a, Point b, Point c, Point d){
 		A=a;
 		B=b;
 		C=c;
 		D=d;
 	}
-	private PointSymbol A, B, C, D;
+	private Point A, B, C, D;
 }
