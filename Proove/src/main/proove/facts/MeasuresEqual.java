@@ -14,8 +14,8 @@ import proove.symbols.Symbol;
  *
  * @param <KeyType>
  */
-public class NewMeasuresEqual<T extends Symbol> extends Fact {
-	public NewMeasuresEqual(T a, T b){
+public class MeasuresEqual<T extends Symbol> extends Fact {
+	public MeasuresEqual(T a, T b){
 		super("Measures Equal", "=");
 		x=a;
 		y=b;
@@ -49,7 +49,7 @@ public class NewMeasuresEqual<T extends Symbol> extends Fact {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public boolean equals(NewMeasuresEqual<T> other) {
+	public boolean equals(MeasuresEqual<T> other) {
 		if (this == other) {
 			return true;
 		}

@@ -1,12 +1,11 @@
 package proove.rules;
 
 import proove.facts.Fact;
-import proove.facts.NewMeasuresEqual;
+import proove.facts.MeasuresEqual;
 import proove.facts.OrientsEqual;
 import proove.info.IncorrectProove;
 import proove.symbols.Angle;
 import proove.symbols.Segment;
-import proove.symbols.Symbol;
 
 /**
  * if Alternate Angles are equal, then two segments are in parallel<p>
@@ -14,26 +13,17 @@ import proove.symbols.Symbol;
  * @author Hai
  *
  */
-public class NewAlternateAngleRule extends NewRule<NewMeasuresEqual<Angle>, OrientsEqual>{
-	public NewAlternateAngleRule(NewMeasuresEqual<Angle> input, OrientsEqual output){
+public class AlternateAngleRule extends Rule<MeasuresEqual<Angle>, OrientsEqual>{
+	public AlternateAngleRule(MeasuresEqual<Angle> input, OrientsEqual output){
 		super(input, output);
 	}
 
-	private Angle checkAngle(Symbol s) throws IncorrectProove{
-		if (!(s instanceof Angle))
-			throw new IncorrectProove("In AlternateAngleRule, left input is not angle symbol");
-		
-		return (Angle)s;
-	}
-	
 	@Override
 	public boolean check() throws IncorrectProove{
 		// verifies that the input is a pair of alternate angles
 		
-		NewMeasuresEqual<Angle> me = (NewMeasuresEqual<Angle>)input;
-		
-		Angle left = checkAngle(me.left());
-		Angle right = checkAngle(me.right());
+		Angle left = input.left();
+		Angle right = input.right();
 		
 		Segment BA = left.from();
 		Segment BC = left.to();

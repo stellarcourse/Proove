@@ -10,10 +10,10 @@ import proove.info.IncorrectProove;
  * @author Hai
  *
  */
-public abstract class NewRule<TI extends Fact, TO extends Fact> {
+public abstract class Rule<TI extends Fact, TO extends Fact> {
 	protected TI input;
 	protected TO output;
-	public NewRule(TI input, TO output){
+	public Rule(TI input, TO output){
 		this.input = input;
 		this.output= output;
 	}

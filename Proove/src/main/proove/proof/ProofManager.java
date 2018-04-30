@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 import proove.facts.Fact;
 import proove.info.IncorrectProove;
-import proove.rules.NewRule;
+import proove.rules.Rule;
 
 
 /**
@@ -14,7 +14,7 @@ import proove.rules.NewRule;
  */
 public class ProofManager {
 	private HashSet<Fact> effects= new HashSet<Fact>();
-	public void addRule(NewRule<? extends Fact, ? extends Fact> x) throws IncorrectProove{
+	public void addRule(Rule<? extends Fact, ? extends Fact> x) throws IncorrectProove{
 		x.verify();
 		effects.add(x.effect());
 	}

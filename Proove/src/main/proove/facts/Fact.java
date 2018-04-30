@@ -1,10 +1,9 @@
 package proove.facts;
 
-import proove.info.IncorrectProove;
-
 /**
  * While the proof steps are progressing, a set can be used to store facts<p>
  * Facts are pieces of statements such as something equals to something, or mirrors
+ * It is known conditions, and also newly created results
  * @author Hai
  *
  */
