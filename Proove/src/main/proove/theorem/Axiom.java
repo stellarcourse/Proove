@@ -1,5 +1,6 @@
 package proove.theorem;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import proove.facts.Fact;
@@ -10,10 +11,10 @@ import proove.facts.Fact;
  * @author Hai
  *
  */
-public abstract class Theorem<TI extends Fact> {
+public abstract class Axiom<TI extends Fact, TO extends Fact> {
 	protected TI input;
-	protected HashSet<Fact> output=new HashSet<Fact>();
-	public Theorem(TI input){
+	protected HashSet<TO> output=new HashSet<TO>();
+	public Axiom(TI input){
 		this.input = input;
 	}
 	public String explain(){
@@ -23,7 +24,7 @@ public abstract class Theorem<TI extends Fact> {
 		result.append(" will always be true");
 		return result.toString();
 	}
-	public HashSet<Fact> effect()	{
-		return output;
+	public ArrayList<TO> effect()	{
+		return new ArrayList<TO>(output);
 	}
 }

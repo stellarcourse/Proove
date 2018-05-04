@@ -1,5 +1,11 @@
 package proove.symbols;
 
+import java.util.Vector;
+
+import proove.facts.Fact;
+import proove.facts.MeasuresEqual;
+import proove.facts.OrientsEqual;
+
 /**
  * A segment is directional from point A to point B
  * @author Hai
@@ -12,6 +18,64 @@ public class Segment extends Symbol {
 		to = b;
 		name = a.getName()+ b.getName();
 	}
+
+	public boolean identical(Segment other){
+		return (from.equals(other.from) && to.equals(other.to));
+	}
+	
+	public Point from(){
+		return from;
+	}
+	
+	public Point to(){
+		return to;
+	}
+	
+	public boolean mirrors(Segment other){
+		return (from.equals(other.to) && to.equals(other.from));
+	}
+	public boolean identicalOrMirrors(Segment other){
+		return identical(other)||mirrors(other);
+	}
+	
+	public Vector<Fact> MidPoint(Point M){
+		Vector<Fact> output = new Vector<Fact>();
+		output.add(new MeasuresEqual<Segment>(new Segment(from, M), new Segment(M, to)));
+		// add about angles
+		output.add(new OrientsEqual(new Segment(from, M), new Segment(from, to)));
+		output.add(new OrientsEqual(new Segment(M, to), new Segment(from, to)));
+		return output;
+	}
+	
+	@Override
+	public boolean mirrors(Object obj) {
+		if (this.equals(obj))
+		return false;
+		
+		if (!(obj instanceof Segment))
+			return false;
+		
+		Segment other = (Segment) obj;
+		return mirrors(other);
+	}
+	public Segment getMirror(){
+		return new Segment(to, from);
+	}	
+	private Point from;
+	private Point to;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Symbol)) {
+			return false;
+		}
+		return identical((Segment) obj);
+	}	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -28,21 +92,9 @@ public class Segment extends Symbol {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-	
-	public boolean equals(Segment other){
-		return (from.equals(other.from) && to.equals(other.to));
-	}
-	
-	public boolean mirrors(Segment other){
-		return (from.equals(other.to) && to.equals(other.from));
-	}
-	public boolean equalsOrMirrors(Segment other){
-		return equals(other)||mirrors(other);
-	}
-	private Point from;
-	private Point to;
+
 	@Override
-	public boolean mirrors(Object obj) {
+	public boolean identical(Object obj) {
 		if (this.equals(obj))
 		return false;
 		
@@ -50,12 +102,6 @@ public class Segment extends Symbol {
 			return false;
 		
 		Segment other = (Segment) obj;
-		if (from.equals(other.to) && to.equals(other.from))
-			return true;
-		
-		return false;
-	}
-	public Segment getMirror(){
-		return new Segment(to, from);
+		return identical(other);
 	}
 }

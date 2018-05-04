@@ -48,7 +48,7 @@ public class MeasuresEqual<T extends Symbol> extends Fact {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public boolean equals(MeasuresEqual<T> other) {
+	public boolean identical(MeasuresEqual<T> other) {
 		if (this == other) {
 			return true;
 		}
@@ -68,4 +68,29 @@ public class MeasuresEqual<T extends Symbol> extends Fact {
 		
 		return false;
 	}	
+	
+	@Override
+	public boolean equals(Object obj){
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof MeasuresEqual<?>))
+			return false;
+		//return equals((MeasuresEqual<T>)other);
+		MeasuresEqual<?> other = (MeasuresEqual<?>) obj;
+		if (x.equals(other.x) && y.equals(other.y))
+			return true;
+		
+		if (x.equals(other.y) && y.equals(other.x))
+			return true;
+
+		if (x.mirrors(other.y) && y.mirrors(other.x))
+			return true;
+		
+		if (x.mirrors(other.x) && y.mirrors(other.y))
+			return true;
+		
+		
+		return false;
+	}
 }

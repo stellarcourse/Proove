@@ -37,8 +37,8 @@ public class AlternateAngleRule extends Rule<MeasuresEqual<Angle>, OrientsEqual>
 		Segment AB = oe.up();
 		Segment CD2 = oe.down();
 		
-		boolean result1= AB.mirrors(BA) && CD.equals(CD2);
-		boolean result2= AB.equals(AB) && CD.mirrors(CD2);
+		boolean result1= AB.mirrors(BA) && CD.identical(CD2);
+		boolean result2= AB.identical(AB) && CD.mirrors(CD2);
 		
 		return result && (result1|| result2);
 	}

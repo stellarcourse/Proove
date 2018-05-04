@@ -64,10 +64,10 @@ public class OrientsEqual extends Fact {
 		}
 		OrientsEqual other = (OrientsEqual) obj;
 		
-		if (x.equals(other.x) && y.equals(other.y))
+		if (x.identical(other.x) && y.identical(other.y))
 			return true;
 		
-		if (x.equals(other.y) && y.equals(other.x))
+		if (x.identical(other.y) && y.identical(other.x))
 			return true;
 
 		if (x.mirrors(other.y) && y.mirrors(other.x))

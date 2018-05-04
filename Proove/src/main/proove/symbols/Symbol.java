@@ -20,7 +20,13 @@ public abstract class Symbol {
 		return result;
 	}
 	
+	public void rename(String newName){
+		name = newName;
+	}
+	
 	public abstract boolean mirrors(Object obj);
+	
+	public abstract boolean identical(Object obj);
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
